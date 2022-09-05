@@ -36,7 +36,7 @@ spec:
         - name: POSTGRES_PASSWORD
           value: my_password
         volumeMounts:
-        - mountPath: "/var/lib/postgresql/data"
+        - mountPath: /var/lib/postgresql/data
           name: postgres
 ---
 apiVersion: v1

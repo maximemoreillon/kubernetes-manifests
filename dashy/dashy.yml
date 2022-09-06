@@ -4,7 +4,6 @@ kind: PersistentVolumeClaim
 metadata:
   name: dashy
 spec:
-  storageClassName: microk8s-hostpath
   accessModes:
     - ReadWriteMany
   resources:

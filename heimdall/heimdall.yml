@@ -2,7 +2,6 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: heimdall
-  namespace: heimdall
 spec:
   accessModes:
     - ReadWriteMany
@@ -14,7 +13,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: heimdall
-  namespace: heimdall
 spec:
   replicas: 1
   selector:
@@ -26,34 +24,33 @@ spec:
         app: heimdall
     spec:
       volumes:
-      - name: heimdall
-        persistentVolumeClaim:
-          claimName: heimdall
+        - name: heimdall
+          persistentVolumeClaim:
+            claimName: heimdall
       containers:
-      - name: heimdall
-        image: linuxserver/heimdall
-        ports:
-        - containerPort: 80
-        env:
-        - name: TZ
-          value: Asia/Tokyo
-        - name: PUID
-          value: "1000"
-        - name: PGID
-          value: "1000"
-        volumeMounts:
-        - mountPath: /config
-          name: heimdall
+        - name: heimdall
+          image: linuxserver/heimdall
+          ports:
+            - containerPort: 80
+          env:
+            - name: TZ
+              value: Asia/Tokyo
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+          volumeMounts:
+            - mountPath: /config
+              name: heimdall
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: heimdall
-  namespace: heimdall
 spec:
   ports:
-  - port: 80
-    nodePort: 30002
+    - port: 80
+      nodePort: 30002
   selector:
     app: heimdall
   type: NodePort

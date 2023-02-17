@@ -24,20 +24,20 @@ spec:
         app: grafana
     spec:
       volumes:
-      - name: grafana
-        persistentVolumeClaim:
-          claimName: grafana
+        - name: grafana
+          persistentVolumeClaim:
+            claimName: grafana
       containers:
-      - name: grafana
-        image: grafana/grafana
-        ports:
-        - containerPort: 3000
-        env:
-        - name: GF_INSTALL_PLUGINS
-          value: yesoreyeram-infinity-datasource
-        volumeMounts:
-        - mountPath: /var/lib/grafana
-          name: grafana
+        - name: grafana
+          image: grafana/grafana
+          ports:
+            - containerPort: 3000
+          # env:
+          # - name: GF_INSTALL_PLUGINS
+          #   value: yesoreyeram-infinity-datasource
+          volumeMounts:
+            - mountPath: /var/lib/grafana
+              name: grafana
 ---
 apiVersion: v1
 kind: Service
@@ -45,8 +45,8 @@ metadata:
   name: grafana
 spec:
   ports:
-  - port: 3000
-    nodePort: 30300
+    - port: 3000
+      nodePort: 30300
   selector:
     app: grafana
   type: NodePort

@@ -29,7 +29,7 @@ spec:
             claimName: heimdall
       containers:
         - name: heimdall
-          image: linuxserver/heimdall
+          image: lscr.io/linuxserver/heimdall:latest
           ports:
             - containerPort: 80
           env:

@@ -30,7 +30,7 @@ spec:
             - containerPort: 8086
           volumeMounts:
             - mountPath: /var/lib/influxdb2
-              name: influxdb-data
+              name: influxdb
           env:
             - name: DOCKER_INFLUXDB_INIT_MODE
               value: setup

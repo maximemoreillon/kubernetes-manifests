@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: pgadmin-pvc
+  name: pgadmin
 spec:
   accessModes:
     - ReadWriteOnce
@@ -38,11 +38,11 @@ spec:
             - containerPort: 80
           volumeMounts:
             - mountPath: /var/lib/pgadmin
-              name: pgadmin-data
+              name: pgadmin
       volumes:
-        - name: pgadmin-data
+        - name: pgadmin
           persistentVolumeClaim:
-            claimName: pgadmin-pvc
+            claimName: pgadmin
 ---
 apiVersion: v1
 kind: Service
@@ -52,8 +52,7 @@ metadata:
   name: pgadmin
 spec:
   ports:
-    - name: padmin-port
-      nodePort: 30165
+    - nodePort: 30165
       port: 80
   selector:
     app: pgadmin

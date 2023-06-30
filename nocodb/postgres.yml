@@ -26,24 +26,24 @@ spec:
         app: postgres
     spec:
       volumes:
-      - name: postgres
-        persistentVolumeClaim:
-          claimName: postgres
+        - name: postgres
+          persistentVolumeClaim:
+            claimName: postgres
       containers:
-      - name: postgres
-        image: postgres
-        ports:
-        - containerPort: 5432
-        env:
-        - name: POSTGRES_PASSWORD
-          value: nocodb
-        - name: POSTGRES_USER
-          value: nocodb
-        - name: POSTGRES_DB
-          value: nocodb
-        volumeMounts:
-        - mountPath: /var/lib/postgresql/data
-          name: postgres
+        - name: postgres
+          image: postgres:13
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_PASSWORD
+              value: nocodb
+            - name: POSTGRES_USER
+              value: nocodb
+            - name: POSTGRES_DB
+              value: nocodb
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgres
 ---
 apiVersion: v1
 kind: Service
@@ -53,6 +53,6 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-  - port: 5432
+    - port: 5432
   selector:
     app: postgres

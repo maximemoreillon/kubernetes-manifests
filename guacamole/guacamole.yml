@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: guacamole
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: guacamole
+  template:
+    metadata:
+      labels:
+        app: guacamole
+    spec:
+      containers:
+        - name: guacamole
+          image: guacamole/guacamole
+          ports:
+            - containerPort: 8080
+          env:
+            - name: POSTGRESQL_HOSTNAME
+              value: postgres
+            - name: POSTGRES_PORT
+              value: "5432"
+            - name: POSTGRESQL_DATABASE
+              value: postgres
+            - name: POSTGRESQL_USER
+              value: postgres
+            - name: POSTGRESQL_PASSWORD
+              value: guacpassword
+            - name: GUACD_HOSTNAME
+              value: guacd
+            - name: GUACD_PORT
+              value: "4822"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: guacamole
+spec:
+  ports:
+    - port: 8080
+      nodePort: 31080
+  selector:
+    app: guacamole
+  type: NodePort

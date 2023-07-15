@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: focalboard
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 300Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: focalboard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: focalboard
+  template:
+    metadata:
+      labels:
+        app: focalboard
+    spec:
+      enableServiceLinks: false
+      containers:
+        - name: focalboard
+          image: mattermost/focalboard
+          ports:
+            - containerPort: 8000
+          volumeMounts:
+            - mountPath: /opt/focalboard/data
+              name: focalboard
+      volumes:
+        - name: focalboard
+          persistentVolumeClaim:
+            claimName: focalboard
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: focalboard
+  labels:
+    app: focalboard
+spec:
+  ports:
+    - port: 8000
+      nodePort: 30801
+  selector:
+    app: focalboard
+  type: NodePort

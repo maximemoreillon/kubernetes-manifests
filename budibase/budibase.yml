@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: budibase
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: budibase
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: budibase
+  template:
+    metadata:
+      labels:
+        app: budibase
+    spec:
+      volumes:
+        - name: budibase
+          persistentVolumeClaim:
+            claimName: budibase
+      containers:
+        - name: budibase
+          image: budibase/budibase:latest
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - mountPath: /data/
+              name: budibase
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: budibase
+spec:
+  ports:
+    - port: 80
+      nodePort: 32013
+  selector:
+    app: budibase
+  type: NodePort

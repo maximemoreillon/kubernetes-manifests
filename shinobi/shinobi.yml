@@ -1,0 +1,81 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: shinobi-config
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: shinobi-mysql
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 25Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: shinobi-videos
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shinobi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shinobi
+  template:
+    metadata:
+      labels:
+        app: shinobi
+    spec:
+      containers:
+        - name: shinobi
+          image: registry.gitlab.com/shinobi-systems/shinobi:dev
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - mountPath: /config
+              name: shinobi-config
+            - mountPath: /var/lib/mysql
+              name: shinobi-mysql
+            - mountPath: /home/Shinobi/videos
+              name: shinobi-videos
+      volumes:
+        - name: shinobi-config
+          persistentVolumeClaim:
+            claimName: shinobi-config
+        - name: shinobi-mysql
+          persistentVolumeClaim:
+            claimName: shinobi-mysql
+        - name: shinobi-videos
+          persistentVolumeClaim:
+            claimName: shinobi-videos
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shinobi
+spec:
+  ports:
+    - port: 8080
+      nodePort: 31000
+  selector:
+    app: shinobi
+  type: NodePort

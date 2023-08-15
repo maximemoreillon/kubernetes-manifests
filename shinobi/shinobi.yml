@@ -75,7 +75,7 @@ metadata:
 spec:
   ports:
     - port: 8080
-      nodePort: 31000
+      nodePort: 31800
   selector:
     app: shinobi
   type: NodePort

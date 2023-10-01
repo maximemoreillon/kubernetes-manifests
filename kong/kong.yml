@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kong
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kong
+  template:
+    metadata:
+      labels:
+        app: kong
+    spec:
+      containers:
+        - name: kong
+          image: kong:3.4.0
+          ports:
+            - containerPort: 8000
+          env:
+            - name: KONG_DATABASE
+              value: "off"
+            - name: KONG_DECLARATIVE_CONFIG
+              value: /kong/declarative/kong.yml
+          volumeMounts:
+            - mountPath: /kong/declarative/
+              name: config
+      volumes:
+        - name: config
+          configMap:
+            name: kong
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kong
+spec:
+  ports:
+    - port: 8000
+      nodePort: 31800
+  selector:
+    app: kong
+  type: NodePort
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kong
+data:
+  kong.yml: |
+
+    _format_version: "3.0"
+    _transform: true
+    services:
+    - name: my-service
+      url: http://my-service
+      routes:
+      - name: my-route
+        paths:
+        - /
+---
+

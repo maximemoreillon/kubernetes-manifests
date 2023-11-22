@@ -20,6 +20,18 @@ spec:
     requests:
       storage: 10Gi
 ---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: homarr-data
+  namespace: homarr
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -36,13 +48,15 @@ spec:
     spec:
       containers:
         - name: homarr
-          image: ghcr.io/ajnart/homarr:latest
+          image: ghcr.io/ajnart/homarr:0.14.1
           ports:
             - containerPort: 7575
           env:
             - name: PASSWORD
               value: mypassword
           volumeMounts:
+            - mountPath: /data
+              name: homarr-data
             - mountPath: /app/data/configs
               name: homarr-configs
             - mountPath: /app/data/icons
@@ -54,6 +68,9 @@ spec:
         - name: homarr-icons
           persistentVolumeClaim:
             claimName: homarr-icons
+        - name: homarr-data
+          persistentVolumeClaim:
+            claimName: homarr-data
 ---
 apiVersion: v1
 kind: Service

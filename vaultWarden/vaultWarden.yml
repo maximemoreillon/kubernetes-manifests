@@ -1,49 +1,50 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: budibase
+  name: vaultwarden-data
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 100Gi
+      storage: 20Gi
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: budibase
+  name: vaultwarden
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: budibase
+      app: vaultwarden
   template:
     metadata:
       labels:
-        app: budibase
+        app: vaultwarden
     spec:
-      volumes:
-        - name: budibase
-          persistentVolumeClaim:
-            claimName: budibase
       containers:
-        - name: budibase
-          image: budibase/budibase:latest
+        - name: vaultwarden
+          image: vaultwarden/server:latest
           ports:
             - containerPort: 80
           volumeMounts:
-            - mountPath: /data/
-              name: budibase
+            - mountPath: /data
+              name: vaultwarden-data
+
+      volumes:
+        - name: vaultwarden-data
+          persistentVolumeClaim:
+            claimName: vaultwarden-data
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: budibase
+  name: vaultwarden
 spec:
   ports:
     - port: 80
-      nodePort: 32013
+      nodePort: 30500
   selector:
-    app: budibase
+    app: vaultwarden
   type: NodePort

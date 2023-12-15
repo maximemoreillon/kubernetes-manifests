@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rally
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rally
+  template:
+    metadata:
+      labels:
+        app: rally
+    spec:
+      containers:
+        - name: rally
+          image: rally/rally
+          ports:
+            - containerPort: 3000
+          env:
+            - name: DATABASE_URL
+              value: postgres://postgres:mypassword@postgres:5432/rally
+            - name: SECRET_PASSWORD
+              value: WKjejTdIx3oaI5DD1waDAq2sPP4lFeXw
+            - name: NEXT_PUBLIC_BASE_URL
+              value: "192.168.1.2:30350"
+            - name: SMTP_HOST
+              value: "mail.example.com"
+            - name: SMTP_PORT
+              value: "25"
+            - name: SMTP_SECURE
+              value: "true"
+            - name: NOREPLY_EMAIL
+              value: "noreply@example.com"
+            - name: SUPPORT_EMAIL
+              value: "support@example.com"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rally
+spec:
+  ports:
+    - port: 3000
+      nodePort: 30030
+  selector:
+    app: rally
+  type: NodePort

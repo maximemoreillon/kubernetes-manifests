@@ -10,4 +10,7 @@ dnsConfig:
     - 8.8.8.8
   searches:
     - speedtest-tracker.svc.cluster.local
+  options:
+    - name: ndots
+      value: "5"
 ```

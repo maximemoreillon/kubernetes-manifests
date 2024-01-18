@@ -1,6 +1,6 @@
 # SpeedTest-Tracker
 
-Please configure the DNS section of the pod according to your needs:
+Please configure the DNS section of the pod specification according to your needs:
 
 ```yml
 dnsConfig:

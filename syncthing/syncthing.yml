@@ -1,0 +1,106 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: syncthing-data
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 500Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /home/user/syncthing
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: syncthing-data
+  namespace: syncthing
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 500Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: syncthing-config
+  namespace: syncthing
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: syncthing
+  namespace: syncthing
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: syncthing
+  template:
+    metadata:
+      labels:
+        app: syncthing
+    spec:
+      containers:
+        - name: syncthing
+          image: syncthing/syncthing
+          ports:
+            - containerPort: 8384
+            - containerPort: 22000
+            - containerPort: 21027
+          env:
+            - name: PUID
+              value: "1000"
+            - name: GUID
+              value: "1000"
+          volumeMounts:
+            - mountPath: /var/syncthing
+              name: syncthing-config
+            - mountPath: /var/syncthing/Sync
+              name: syncthing-data
+      volumes:
+        - name: syncthing-config
+          persistentVolumeClaim:
+            claimName: syncthing-config
+        - name: syncthing-data
+          persistentVolumeClaim:
+            claimName: syncthing-data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: syncthing
+  namespace: syncthing
+spec:
+  ports:
+    - name: ui
+      port: 8384
+      protocol: TCP
+      targetPort: 8384
+    - name: tcp-file-transfer
+      port: 22000
+      protocol: TCP
+      targetPort: 22000
+    - name: quic-file-transfer
+      port: 22000
+      protocol: UDP
+      targetPort: 22000
+    - name: discovery
+      port: 21027
+      protocol: UDP
+      targetPort: 21027
+  selector:
+    app: syncthing
+  type: ClusterIP

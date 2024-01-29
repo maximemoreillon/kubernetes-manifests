@@ -1,0 +1,86 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: emqx-data
+  namespace: emqx
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: emqx
+  namespace: emqx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: emqx
+  template:
+    metadata:
+      labels:
+        app: emqx
+    spec:
+      containers:
+        - name: emqx
+          image: emqx:5.4.1
+          ports:
+            - containerPort: 1883 # MQTT
+            - containerPort: 8883 # MQTTS
+            - containerPort: 8083 # WS
+            - containerPort: 8084 # WSS
+            - containerPort: 18083 # UI
+          env:
+            - name: EMQX_NAME
+              value: emqx
+            - name: EMQX_HOST
+              value: "192.168.1.2"
+          volumeMounts:
+            - mountPath: /opt/emqx/data/
+              name: data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: emqx-data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: emqx
+  namespace: emqx
+spec:
+  type: ClusterIP
+  selector:
+    app: emqx
+  ports:
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: emqx
+  namespace: emqx
+spec:
+  type: NodePort
+  selector:
+    app: emqx
+  ports:
+    - port: 1883
+      nodePort: 31883
+      name: mqtt
+    - port: 8883
+      nodePort: 32883
+      name: mqtts
+    - port: 8083
+      name: ws
+      nodePort: 30803
+    - port: 8084
+      name: wss
+      nodePort: 30804
+    - port: 18083
+      name: ui
+      nodePort: 31803

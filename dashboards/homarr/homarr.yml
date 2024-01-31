@@ -58,7 +58,7 @@ spec:
               name: homarr-data
             - mountPath: /app/data/configs
               name: homarr-configs
-            - mountPath: /app/data/icons
+            - mountPath: /app/public/icons
               name: homarr-icons
       volumes:
         - name: homarr-configs

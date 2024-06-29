@@ -30,8 +30,6 @@ spec:
       containers:
         - name: cloudbeaver
           image: dbeaver/cloudbeaver:23.2.5
-          ports:
-            - containerPort: 8978
           volumeMounts:
             - mountPath: /opt/cloudbeaver/workspace
               name: workspace

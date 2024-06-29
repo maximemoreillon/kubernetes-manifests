@@ -26,8 +26,6 @@ spec:
       containers:
         - name: vaultwarden
           image: vaultwarden/server:latest
-          ports:
-            - containerPort: 80
           volumeMounts:
             - mountPath: /data
               name: vaultwarden-data

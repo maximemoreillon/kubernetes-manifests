@@ -26,8 +26,6 @@ spec:
       containers:
         - name: redmine
           image: sameersbn/redmine:4.1.1-9
-          ports:
-            - containerPort: 80
           env:
             - name: DB_ADAPTER
               value: postgresql

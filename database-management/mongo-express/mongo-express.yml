@@ -15,8 +15,6 @@ spec:
       containers:
         - name: mongo-express
           image: mongo-express
-          ports:
-            - containerPort: 8081
           env:
             - name: ME_CONFIG_MONGODB_URL
               value: mongodb://172.16.98.151

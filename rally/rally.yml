@@ -15,8 +15,6 @@ spec:
       containers:
         - name: rally
           image: rally/rally
-          ports:
-            - containerPort: 3000
           env:
             - name: DATABASE_URL
               value: postgres://postgres:mypassword@postgres:5432/rally

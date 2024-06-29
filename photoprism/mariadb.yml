@@ -26,8 +26,6 @@ spec:
       containers:
         - name: mariadb
           image: mariadb:10.11
-          ports:
-            - containerPort: 3306
           env:
             - name: MYSQL_ROOT_PASSWORD
               value: photoprism

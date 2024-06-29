@@ -13,19 +13,17 @@ spec:
         app: privoxy
     spec:
       containers:
-      - name: privoxy
-        image: vimagick/privoxy
-        ports:
-        - containerPort: 8118
-        env:
-        volumeMounts:
-        - mountPath: /etc/privoxy/config
-          name: privoxy-config
-          subPath: config
+        - name: privoxy
+          image: vimagick/privoxy
+          env:
+          volumeMounts:
+            - mountPath: /etc/privoxy/config
+              name: privoxy-config
+              subPath: config
       volumes:
-      - name: privoxy-config
-        configMap:
-          name: privoxy-config
+        - name: privoxy-config
+          configMap:
+            name: privoxy-config
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -69,5 +67,5 @@ spec:
   selector:
     app: privoxy
   ports:
-  - port: 8118
-    nodePort: 30118
+    - port: 8118
+      nodePort: 30118

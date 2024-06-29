@@ -27,8 +27,6 @@ spec:
       containers:
         - name: trilium
           image: zadam/trilium:0.60.4
-          ports:
-            - containerPort: 8080
           env:
             - name: TRILIUM_PORT
               value: "8080"

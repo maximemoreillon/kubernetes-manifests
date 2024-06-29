@@ -27,8 +27,6 @@ spec:
       containers:
         - name: focalboard
           image: mattermost/focalboard
-          ports:
-            - containerPort: 8000
           volumeMounts:
             - mountPath: /opt/focalboard/data
               name: focalboard

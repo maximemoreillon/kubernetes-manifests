@@ -56,10 +56,6 @@ spec:
       containers:
         - name: syncthing
           image: syncthing/syncthing
-          ports:
-            - containerPort: 8384
-            - containerPort: 22000
-            - containerPort: 21027
           env:
             - name: PUID
               value: "1000"

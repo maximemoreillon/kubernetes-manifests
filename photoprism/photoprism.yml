@@ -37,8 +37,6 @@ spec:
       containers:
         - name: photoprism
           image: photoprism/photoprism
-          ports:
-            - containerPort: 2342
           env:
             - name: PHOTOPRISM_ADMIN_USER
               value: admin

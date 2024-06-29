@@ -48,8 +48,6 @@ spec:
       containers:
         - name: shinobi
           image: registry.gitlab.com/shinobi-systems/shinobi:dev
-          ports:
-            - containerPort: 8080
           volumeMounts:
             - mountPath: /config
               name: shinobi-config

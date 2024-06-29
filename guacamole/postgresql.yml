@@ -26,8 +26,6 @@ spec:
       containers:
         - name: postgres
           image: postgres:15.1
-          ports:
-            - containerPort: 5432
           env:
             - name: POSTGRES_PASSWORD
               value: guacpassword

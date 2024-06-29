@@ -31,8 +31,6 @@ spec:
       containers:
         - name: node-red
           image: nodered/node-red
-          ports:
-            - containerPort: 1880
           volumeMounts:
             - mountPath: /data
               name: node-red

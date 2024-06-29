@@ -26,8 +26,6 @@ spec:
       containers:
         - name: nocodb
           image: nocodb/nocodb
-          ports:
-            - containerPort: 8080
           env:
             - name: NC_DB
               value: pg://postgres:5432?u=nocodb&p=nocodb&d=nocodb

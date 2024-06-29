@@ -15,8 +15,6 @@ spec:
       containers:
         - name: guacamole
           image: guacamole/guacamole
-          ports:
-            - containerPort: 8080
           env:
             - name: POSTGRESQL_HOSTNAME
               value: postgres

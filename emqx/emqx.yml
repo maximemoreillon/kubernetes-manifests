@@ -28,12 +28,6 @@ spec:
       containers:
         - name: emqx
           image: emqx:5.4.1
-          ports:
-            - containerPort: 1883 # MQTT
-            - containerPort: 8883 # MQTTS
-            - containerPort: 8083 # WS
-            - containerPort: 8084 # WSS
-            - containerPort: 18083 # UI
           env:
             - name: EMQX_NAME
               value: emqx

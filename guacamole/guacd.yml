@@ -15,8 +15,6 @@ spec:
       containers:
         - name: guacd
           image: guacamole/guacd
-          ports:
-            - containerPort: 4822
 ---
 apiVersion: v1
 kind: Service

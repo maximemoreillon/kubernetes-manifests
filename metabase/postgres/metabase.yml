@@ -15,8 +15,6 @@ spec:
       containers:
         - name: metabase
           image: metabase/metabase
-          ports:
-            - containerPort: 3000
           env:
             - name: MB_DB_TYPE
               value: postgres

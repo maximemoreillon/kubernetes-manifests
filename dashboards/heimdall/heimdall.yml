@@ -30,8 +30,6 @@ spec:
       containers:
         - name: heimdall
           image: lscr.io/linuxserver/heimdall:latest
-          ports:
-            - containerPort: 80
           env:
             - name: TZ
               value: Asia/Tokyo

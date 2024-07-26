@@ -30,8 +30,6 @@ spec:
       containers:
         - name: mysql
           image: mysql
-          ports:
-            - containerPort: 3306
           env:
             - name: MYSQL_ROOT_PASSWORD
               value: keyboardcat

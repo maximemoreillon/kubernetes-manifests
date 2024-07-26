@@ -26,8 +26,6 @@ spec:
       containers:
         - name: influxdb
           image: influxdb
-          ports:
-            - containerPort: 8086
           volumeMounts:
             - mountPath: /var/lib/influxdb2
               name: influxdb

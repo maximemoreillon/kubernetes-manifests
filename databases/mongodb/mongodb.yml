@@ -24,17 +24,15 @@ spec:
         app: mongo
     spec:
       volumes:
-      - name: mongo
-        persistentVolumeClaim:
-          claimName: mongo
+        - name: mongo
+          persistentVolumeClaim:
+            claimName: mongo
       containers:
-      - name: mongo
-        image: mongo
-        ports:
-        - containerPort: 27017
-        volumeMounts:
-        - mountPath: /data/db
-          name: mongo
+        - name: mongo
+          image: mongo
+          volumeMounts:
+            - mountPath: /data/db
+              name: mongo
 ---
 apiVersion: v1
 kind: Service
@@ -42,8 +40,8 @@ metadata:
   name: mongo
 spec:
   ports:
-  - port: 27017
-    nodePort: 30217
+    - port: 27017
+      nodePort: 30217
   selector:
     app: mongo
   type: NodePort

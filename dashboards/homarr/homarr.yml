@@ -47,7 +47,7 @@ spec:
     spec:
       containers:
         - name: homarr
-          image: ghcr.io/ajnart/homarr:0.14.4
+          image: ghcr.io/ajnart/homarr:0.15.3
           env:
             - name: PASSWORD
               value: mypassword

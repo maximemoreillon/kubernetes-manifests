@@ -35,6 +35,7 @@ spec:
             claimName: dashy
 ---
 # A Single-use pod to create the content of /app/public in the PV
+# TODO: this should be an initcontainer
 apiVersion: v1
 kind: Pod
 metadata:

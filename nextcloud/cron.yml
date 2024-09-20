@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: cron
-  namespace: nextcloud
 spec:
   replicas: 1
   selector:
@@ -14,18 +13,18 @@ spec:
         app: cron
     spec:
       containers:
-      - image: nextcloud:23.0.3
-        name: cron
-        command:
-        - /cron.sh
-        envFrom:
-        - secretRef:
-           name: environment
-        volumeMounts:
-        - mountPath: /var/www/html
-          name: nextcloud
+        - image: nextcloud:23.0.3
+          name: cron
+          command:
+            - /cron.sh
+          envFrom:
+            - secretRef:
+                name: environment
+          volumeMounts:
+            - mountPath: /var/www/html
+              name: nextcloud
       restartPolicy: Always
       volumes:
-      - name: nextcloud
-        persistentVolumeClaim:
-          claimName: nextcloud
+        - name: nextcloud
+          persistentVolumeClaim:
+            claimName: nextcloud

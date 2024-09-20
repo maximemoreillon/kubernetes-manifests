@@ -2,7 +2,6 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: nextcloud
-  namespace: nextcloud
 spec:
   accessModes:
     - ReadWriteOnce
@@ -14,7 +13,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nextcloud
-  namespace: nextcloud
 spec:
   replicas: 1
   selector:
@@ -26,16 +24,14 @@ spec:
         app: nextcloud
     spec:
       containers:
-      - name: nextcloud
-        image: nextcloud:23.0.3
-        ports:
-        - containerPort: 80
-        volumeMounts:
-        - mountPath: /var/www/html
-          name: nextcloud
-        envFrom:
-        - secretRef:
-           name: environment
+        - name: nextcloud
+          image: nextcloud:23.0.3
+          volumeMounts:
+            - mountPath: /var/www/html
+              name: nextcloud
+          envFrom:
+            - secretRef:
+                name: environment
       volumes:
         - name: nextcloud
           persistentVolumeClaim:
@@ -45,34 +41,9 @@ apiVersion: v1
 kind: Service
 metadata:
   name: nextcloud
-  namespace: nextcloud
 spec:
   ports:
-  - port: 80
+    - port: 80
   selector:
     app: nextcloud
   type: ClusterIP
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: nextcloud
-  namespace: nextcloud
-  annotations:
-    kubernetes.io/ingress.class: "nginx"
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
-    nginx.ingress.kubernetes.io/proxy-body-size: 4G
-    nginx/client_max_body_size: 4G
-spec:
-  tls:
-  - hosts:
-    - nextcloud.example.com
-    secretName: nextcloud
-  rules:
-  - host: nextcloud.example.com
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: nextcloud
-          servicePort: 80

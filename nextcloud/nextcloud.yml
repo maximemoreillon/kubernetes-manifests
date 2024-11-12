@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
         - name: nextcloud
-          image: nextcloud:23.0.3
+          image: nextcloud:30.0.2
           volumeMounts:
             - mountPath: /var/www/html
               name: nextcloud

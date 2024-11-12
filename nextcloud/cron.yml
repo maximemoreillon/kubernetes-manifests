@@ -13,7 +13,7 @@ spec:
         app: cron
     spec:
       containers:
-        - image: nextcloud:23.0.3
+        - image: nextcloud:30.0.2
           name: cron
           command:
             - /cron.sh

@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
         - name: mariadb
-          image: mariadb:10.5.9
+          image: mariadb:11.5.2
           envFrom:
             - secretRef:
                 name: environment

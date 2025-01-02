@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: filestash
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: filestash
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: filestash
+  template:
+    metadata:
+      labels:
+        app: filestash
+    spec:
+      containers:
+        - name: filestash
+          image: machines/filestash:6b271d3
+          # env:
+          volumeMounts:
+            - mountPath: /app/data/state
+              name: state
+      volumes:
+        - name: state
+          persistentVolumeClaim:
+            claimName: filestash
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana
+spec:
+  ports:
+    - port: 8334
+      nodePort: 30334
+  selector:
+    app: filestash
+  type: NodePort

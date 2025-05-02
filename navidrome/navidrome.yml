@@ -1,0 +1,63 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: navidrome-data
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: navidrome-music
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 20Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: navidrome
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: navidrome
+  template:
+    metadata:
+      labels:
+        app: navidrome
+    spec:
+      containers:
+        - name: navidrome
+          image: deluan/navidrome
+          volumeMounts:
+            - mountPath: /music
+              name: music
+            - mountPath: /data
+              name: data
+      volumes:
+        - name: music
+          persistentVolumeClaim:
+            claimName: navidrome-music
+        - name: data
+          persistentVolumeClaim:
+            claimName: navidrome-data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: navidrome
+spec:
+  ports:
+    - port: 4533
+      nodePort: 30533
+  selector:
+    app: navidrome
+  type: NodePort

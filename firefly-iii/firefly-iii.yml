@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: firefly-iii
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: firefly-iii
+  template:
+    metadata:
+      labels:
+        app: firefly-iii
+    spec:
+      containers:
+        - name: firefly-iii
+          image: fireflyiii/core:latest
+          envFrom:
+            - secretRef:
+                name: firefly-iii-env
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: firefly-iii
+spec:
+  ports:
+    - port: 8080
+  selector:
+    app: firefly-iii
+  type: ClusterIP

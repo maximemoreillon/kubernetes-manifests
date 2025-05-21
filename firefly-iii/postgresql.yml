@@ -32,7 +32,11 @@ spec:
           image: postgres
           env:
             - name: POSTGRES_PASSWORD
-              value: my_password
+              value: fireflydbpassword
+            - name: POSTGRES_DB
+              value: firefly
+            - name: POSTGRES_USER
+              value: firefly
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: postgres

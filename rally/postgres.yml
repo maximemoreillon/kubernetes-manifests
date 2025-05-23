@@ -30,14 +30,22 @@ spec:
       containers:
         - name: postgres:14.2
           image: postgres
-          env:
-            - name: POSTGRES_PASSWORD
-              value: mypassword
-            - name: POSTGRES_DB
-              value: rally
+          envFrom:
+            - secretRef:
+                name: postgresql-env
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: postgres
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: postgresql-env
+type: Opaque
+stringData:
+  POSTGRES_PASSWORD: dbpassword
+  POSTGRES_DB: dbname
+  POSTGRES_USER: dbuser
 ---
 apiVersion: v1
 kind: Service

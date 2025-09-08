@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: homebox
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homebox
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: homebox
+  template:
+    metadata:
+      labels:
+        app: homebox
+    spec:
+      volumes:
+        - name: homebox
+          persistentVolumeClaim:
+            claimName: homebox
+      containers:
+        - name: homebox
+          image: ghcr.io/sysadminsmedia/homebox:latest
+          volumeMounts:
+            - mountPath: /data
+              name: homebox
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: homebox
+  namespace: homebox
+spec:
+  ports:
+    - port: 7745
+      nodePort: 30745
+  selector:
+    app: homebox
+  type: NodePort

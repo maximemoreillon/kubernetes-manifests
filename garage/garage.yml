@@ -1,0 +1,76 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: garage-data
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: garage-meta
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: garage
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: garage
+  template:
+    metadata:
+      labels:
+        app: garage
+    spec:
+      containers:
+        - name: garage
+          image: dxflrs/garage:v2.1.0
+          volumeMounts:
+            - mountPath: /etc/garage.toml
+              name: configuration
+              subPath: garage.toml
+            - mountPath: /mnt/meta
+              name: meta
+            - mountPath: /mnt/data
+              name: data
+      volumes:
+        - name: configuration
+          configMap:
+            name: configuration
+        - name: meta
+          persistentVolumeClaim:
+            claimName: garage-meta
+        - name: data
+          persistentVolumeClaim:
+            claimName: garage-data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: garage
+spec:
+  ports:
+    - name: s3
+      port: 3900
+      nodePort: 30900
+    - name: web
+      port: 3902
+      nodePort: 30902
+    - name: admin
+      port: 3903
+      nodePort: 30903
+  selector:
+    app: garage
+  type: NodePort

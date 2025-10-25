@@ -43,7 +43,6 @@ metadata:
 spec:
   ports:
     - port: 8080
-      nodePort: 30808
   selector:
     app: trilium
-  type: NodePort
+  type: ClusterIP

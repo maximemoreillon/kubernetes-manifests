@@ -50,7 +50,6 @@ metadata:
 spec:
   ports:
     - port: 3306
-      nodePort: 30306
   selector:
     app: mysql
-  type: NodePort
+  type: ClusterIP

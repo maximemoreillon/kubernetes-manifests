@@ -47,10 +47,8 @@ spec:
   ports:
     - name: http
       port: 3000
-      nodePort: 30300
     - name: ssh
       port: 22
-      nodePort: 30022
   selector:
     app: gitea
-  type: NodePort
+  type: ClusterIP

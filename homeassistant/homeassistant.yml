@@ -42,7 +42,6 @@ metadata:
 spec:
   ports:
     - port: 8123
-      nodePort: 30123
   selector:
     app: homeassistant
-  type: NodePort
+  type: ClusterIP

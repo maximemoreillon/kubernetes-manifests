@@ -44,14 +44,12 @@ kind: Service
 metadata:
   name: minio
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
     - name: minio
       port: 9000
-      nodePort: 30275
     - name: console
       port: 9090
-      nodePort: 30276
   selector:
     app: minio
 ---

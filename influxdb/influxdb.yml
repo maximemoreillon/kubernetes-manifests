@@ -52,7 +52,6 @@ metadata:
 spec:
   ports:
     - port: 8086
-      nodePort: 30886
   selector:
     app: influxdb
-  type: NodePort
+  type: ClusterIP

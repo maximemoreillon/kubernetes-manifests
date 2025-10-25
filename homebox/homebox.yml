@@ -43,7 +43,6 @@ metadata:
 spec:
   ports:
     - port: 7745
-      nodePort: 30745
   selector:
     app: homebox
-  type: NodePort
+  type: ClusterIP

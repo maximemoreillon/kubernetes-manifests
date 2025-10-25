@@ -52,7 +52,6 @@ metadata:
 spec:
   ports:
     - port: 80
-      nodePort: 30300
   selector:
     app: redmine
-  type: NodePort
+  type: ClusterIP

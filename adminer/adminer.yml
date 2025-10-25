@@ -23,7 +23,6 @@ metadata:
 spec:
   ports:
     - port: 8080
-      nodePort: 30433
   selector:
     app: adminer
-  type: NodePort
+  type: ClusterIP

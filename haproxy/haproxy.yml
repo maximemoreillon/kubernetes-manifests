@@ -56,9 +56,8 @@ kind: Service
 metadata:
   name: haproxy
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: haproxy
   ports:
     - port: 80
-      nodePort: 32016

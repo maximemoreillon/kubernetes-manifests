@@ -42,9 +42,8 @@ kind: Service
 metadata:
   name: pypiserver
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: pypiserver
   ports:
     - port: 8080
-      nodePort: 30808

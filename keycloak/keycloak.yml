@@ -44,7 +44,6 @@ metadata:
 spec:
   ports:
     - port: 8080
-      nodePort: 30416
   selector:
     app: keycloak
-  type: NodePort
+  type: ClusterIP

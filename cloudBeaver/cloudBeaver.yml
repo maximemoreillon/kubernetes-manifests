@@ -42,7 +42,6 @@ metadata:
 spec:
   ports:
     - port: 8978
-      nodePort: 30433
   selector:
     app: cloudbeaver
-  type: NodePort
+  type: ClusterIP

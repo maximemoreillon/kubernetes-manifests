@@ -76,13 +76,11 @@ kind: Service
 metadata:
   name: mosquitto
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: mosquitto
   ports:
     - port: 1883
-      nodePort: 30883
       name: mqtt
     - port: 9001
-      nodePort: 30884
       name: ws

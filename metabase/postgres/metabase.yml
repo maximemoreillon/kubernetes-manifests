@@ -36,7 +36,6 @@ metadata:
 spec:
   ports:
     - port: 3000
-      nodePort: 30030
   selector:
     app: metabase
-  type: NodePort
+  type: ClusterIP

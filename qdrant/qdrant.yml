@@ -43,9 +43,8 @@ metadata:
 spec:
   ports:
     - port: 6333
-      nodePort: 30633
   selector:
     app: qdrant
-  type: NodePort
+  type: ClusterIP
 ---
 

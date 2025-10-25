@@ -75,9 +75,8 @@ kind: Service
 metadata:
   name: photoprism
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: photoprism
   ports:
     - port: 2342
-      nodePort: 30342

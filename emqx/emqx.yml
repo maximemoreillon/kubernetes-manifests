@@ -59,22 +59,17 @@ metadata:
   name: emqx
   namespace: emqx
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: emqx
   ports:
     - port: 1883
-      nodePort: 31883
       name: mqtt
     - port: 8883
-      nodePort: 32883
       name: mqtts
     - port: 8083
       name: ws
-      nodePort: 30803
     - port: 8084
       name: wss
-      nodePort: 30804
     - port: 18083
       name: ui
-      nodePort: 31803

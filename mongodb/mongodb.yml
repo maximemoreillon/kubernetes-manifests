@@ -41,7 +41,6 @@ metadata:
 spec:
   ports:
     - port: 27017
-      nodePort: 30217
   selector:
     app: mongo
-  type: NodePort
+  type: ClusterIP

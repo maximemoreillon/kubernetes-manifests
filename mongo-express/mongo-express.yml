@@ -27,7 +27,6 @@ metadata:
 spec:
   ports:
     - port: 8081
-      nodePort: 30881
   selector:
     app: mongo-express
-  type: NodePort
+  type: ClusterIP

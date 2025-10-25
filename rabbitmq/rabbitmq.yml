@@ -23,7 +23,6 @@ metadata:
 spec:
   ports:
     - port: 5672
-      nodePort: 30672
   selector:
     app: rabbitmq
-  type: NodePort
+  type: ClusterIP

@@ -42,7 +42,6 @@ metadata:
 spec:
   ports:
     - port: 80
-      nodePort: 30980
   selector:
     app: apache-answer
-  type: NodePort
+  type: ClusterIP

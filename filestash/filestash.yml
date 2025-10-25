@@ -42,7 +42,6 @@ metadata:
 spec:
   ports:
     - port: 8334
-      nodePort: 30334
   selector:
     app: filestash
-  type: NodePort
+  type: ClusterIP

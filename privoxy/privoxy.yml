@@ -63,9 +63,8 @@ kind: Service
 metadata:
   name: privoxy
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: privoxy
   ports:
     - port: 8118
-      nodePort: 30118

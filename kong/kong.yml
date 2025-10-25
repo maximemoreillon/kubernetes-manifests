@@ -37,10 +37,9 @@ metadata:
 spec:
   ports:
     - port: 8000
-      nodePort: 31800
   selector:
     app: kong
-  type: NodePort
+  type: ClusterIP
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -58,5 +57,3 @@ data:
       - name: my-route
         paths:
         - /
----
-

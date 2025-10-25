@@ -73,7 +73,6 @@ metadata:
 spec:
   ports:
     - port: 8080
-      nodePort: 31800
   selector:
     app: shinobi
-  type: NodePort
+  type: ClusterIP

@@ -40,7 +40,6 @@ metadata:
 spec:
   ports:
     - port: 3000
-      nodePort: 30030
   selector:
     app: rally
-  type: NodePort
+  type: ClusterIP

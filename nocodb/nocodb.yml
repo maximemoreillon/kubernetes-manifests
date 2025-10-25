@@ -44,9 +44,8 @@ kind: Service
 metadata:
   name: nocodb
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: nocodb
   ports:
     - port: 8080
-      nodePort: 31080

@@ -76,7 +76,6 @@ metadata:
 spec:
   ports:
     - port: 7575
-      nodePort: 30008
   selector:
     app: homarr
-  type: NodePort
+  type: ClusterIP

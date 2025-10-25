@@ -50,8 +50,7 @@ metadata:
   name: pgadmin
 spec:
   ports:
-    - nodePort: 30165
-      port: 80
+    port: 80
   selector:
     app: pgadmin
-  type: NodePort
+  type: ClusterIP

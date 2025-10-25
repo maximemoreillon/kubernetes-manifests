@@ -40,13 +40,11 @@ kind: Service
 metadata:
   name: neo4j
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: neo4j
   ports:
     - port: 7474
-      nodePort: 30474
       name: neo4j-http
     - port: 7687
-      nodePort: 30687
       name: neo4j-bolt

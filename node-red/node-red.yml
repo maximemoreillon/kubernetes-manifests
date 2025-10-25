@@ -42,7 +42,6 @@ metadata:
 spec:
   ports:
     - port: 1880
-      nodePort: 31880
   selector:
     app: node-red
-  type: NodePort
+  type: ClusterIP

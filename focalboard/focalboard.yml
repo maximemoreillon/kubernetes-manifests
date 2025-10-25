@@ -44,7 +44,6 @@ metadata:
 spec:
   ports:
     - port: 8000
-      nodePort: 30801
   selector:
     app: focalboard
-  type: NodePort
+  type: ClusterIP

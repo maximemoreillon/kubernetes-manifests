@@ -36,7 +36,6 @@ metadata:
 spec:
   ports:
     - port: 3909
-      nodePort: 30909
   selector:
     app: garage-webui
-  type: NodePort
+  type: ClusterIP

@@ -64,13 +64,10 @@ spec:
   ports:
     - name: s3
       port: 3900
-      nodePort: 30900
     - name: web
       port: 3902
-      nodePort: 30902
     - name: admin
       port: 3903
-      nodePort: 30903
   selector:
     app: garage
-  type: NodePort
+  type: ClusterIP

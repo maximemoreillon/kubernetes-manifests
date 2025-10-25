@@ -53,7 +53,6 @@ metadata:
 spec:
   ports:
     - port: 80
-      nodePort: 30081
   selector:
     app: wordpress
-  type: NodePort
+  type: ClusterIP

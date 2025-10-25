@@ -45,7 +45,6 @@ metadata:
 spec:
   ports:
     - port: 5432
-      nodePort: 31432
   selector:
     app: timescaledb
-  type: NodePort
+  type: ClusterIP

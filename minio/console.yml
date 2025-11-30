@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minio-console
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: minio-console
+  template:
+    metadata:
+      labels:
+        app: minio-console
+    spec:
+      containers:
+        - name: minio-console
+          image: huncrys/minio-console:v1.8.1
+          env:
+            - name: CONSOLE_MINIO_SERVER
+              value: http://minio:9000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: minio-console
+spec:
+  type: ClusterIP
+  ports:
+    - port: 9090
+  selector:
+    app: minio-console

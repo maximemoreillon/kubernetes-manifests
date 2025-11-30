@@ -29,12 +29,12 @@ spec:
             claimName: minio
       containers:
         - name: minio
-          image: quay.io/minio/minio:latest
+          image: quay.io/minio/minio:RELEASE.2025-09-07T16-13-09Z
           command:
             - /bin/bash
             - -c
           args:
-            - minio server /data --console-address :9090 --address :9000
+            - minio server /data --address :9000
           volumeMounts:
             - mountPath: /data
               name: minio
@@ -46,10 +46,7 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-    - name: minio
-      port: 9000
-    - name: console
-      port: 9090
+    - port: 9000
   selector:
     app: minio
 ---

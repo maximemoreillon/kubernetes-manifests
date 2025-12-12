@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gatus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gatus
+  template:
+    metadata:
+      labels:
+        app: gatus
+    spec:
+      containers:
+        - name: gatus
+          image: twinproduction/gatus
+          volumeMounts:
+            - mountPath: /config
+              name: config
+      volumes:
+        - name: config
+          configMap:
+            name: gatus-config
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gatus-config
+data:
+  config.yml: |
+    client:
+      timeout: 5s
+    endpoints:
+    - name: app-01
+      url: "http://192.168.1.3"
+      interval: 5s
+      conditions:
+        - "[STATUS] == 200"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gatus
+spec:
+  ports:
+    - port: 8080
+  selector:
+    app: gatus
+  type: ClusterIP

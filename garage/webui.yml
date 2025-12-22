@@ -6,11 +6,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: garage-webui
+      app.kubernetes.io/name: garage-webui
   template:
     metadata:
       labels:
-        app: garage-webui
+        app.kubernetes.io/name: garage-webui
     spec:
       containers:
         - name: garage-webui
@@ -37,5 +37,5 @@ spec:
   ports:
     - port: 3909
   selector:
-    app: garage-webui
+    app.kubernetes.io/name: garage-webui
   type: ClusterIP

@@ -18,11 +18,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: node-red
+      app.kubernetes.io/name: node-red
   template:
     metadata:
       labels:
-        app: node-red
+        app.kubernetes.io/name: node-red
     spec:
       volumes:
         - name: node-red
@@ -43,5 +43,5 @@ spec:
   ports:
     - port: 1880
   selector:
-    app: node-red
+    app.kubernetes.io/name: node-red
   type: ClusterIP

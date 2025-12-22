@@ -39,11 +39,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: shinobi
+      app.kubernetes.io/name: shinobi
   template:
     metadata:
       labels:
-        app: shinobi
+        app.kubernetes.io/name: shinobi
     spec:
       containers:
         - name: shinobi
@@ -74,5 +74,5 @@ spec:
   ports:
     - port: 8080
   selector:
-    app: shinobi
+    app.kubernetes.io/name: shinobi
   type: ClusterIP

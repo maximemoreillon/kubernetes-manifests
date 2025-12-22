@@ -6,11 +6,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: guacamole
+      app.kubernetes.io/name: guacamole
   template:
     metadata:
       labels:
-        app: guacamole
+        app.kubernetes.io/name: guacamole
     spec:
       containers:
         - name: guacamole
@@ -40,5 +40,5 @@ spec:
   ports:
     - port: 8080
   selector:
-    app: guacamole
+    app.kubernetes.io/name: guacamole
   type: ClusterIP

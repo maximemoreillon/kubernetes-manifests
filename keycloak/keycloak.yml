@@ -6,11 +6,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: keycloak
+      app.kubernetes.io/name: keycloak
   template:
     metadata:
       labels:
-        app: keycloak
+        app.kubernetes.io/name: keycloak
     spec:
       containers:
         - name: keycloak
@@ -45,5 +45,5 @@ spec:
   ports:
     - port: 8080
   selector:
-    app: keycloak
+    app.kubernetes.io/name: keycloak
   type: ClusterIP

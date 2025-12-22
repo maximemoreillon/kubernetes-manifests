@@ -17,11 +17,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: heimdall
+      app.kubernetes.io/name: heimdall
   template:
     metadata:
       labels:
-        app: heimdall
+        app.kubernetes.io/name: heimdall
     spec:
       volumes:
         - name: heimdall
@@ -49,5 +49,5 @@ spec:
   ports:
     - port: 80
   selector:
-    app: heimdall
+    app.kubernetes.io/name: heimdall
   type: ClusterIP

@@ -19,11 +19,11 @@ spec:
     type: Recreate
   selector:
     matchLabels:
-      app: qdrant
+      app.kubernetes.io/name: qdrant
   template:
     metadata:
       labels:
-        app: qdrant
+        app.kubernetes.io/name: qdrant
     spec:
       containers:
         - name: qdrant
@@ -44,7 +44,7 @@ spec:
   ports:
     - port: 6333
   selector:
-    app: qdrant
+    app.kubernetes.io/name: qdrant
   type: ClusterIP
 ---
 

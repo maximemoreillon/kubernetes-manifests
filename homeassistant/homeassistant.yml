@@ -17,11 +17,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: homeassistant
+      app.kubernetes.io/name: homeassistant
   template:
     metadata:
       labels:
-        app: homeassistant
+        app.kubernetes.io/name: homeassistant
     spec:
       volumes:
         - name: homeassistant
@@ -43,5 +43,5 @@ spec:
   ports:
     - port: 8123
   selector:
-    app: homeassistant
+    app.kubernetes.io/name: homeassistant
   type: ClusterIP

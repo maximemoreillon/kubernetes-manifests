@@ -17,11 +17,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: homebox
+      app.kubernetes.io/name: homebox
   template:
     metadata:
       labels:
-        app: homebox
+        app.kubernetes.io/name: homebox
     spec:
       volumes:
         - name: homebox
@@ -44,5 +44,5 @@ spec:
   ports:
     - port: 7745
   selector:
-    app: homebox
+    app.kubernetes.io/name: homebox
   type: ClusterIP

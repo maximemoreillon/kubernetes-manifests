@@ -28,11 +28,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: photoprism
+      app.kubernetes.io/name: photoprism
   template:
     metadata:
       labels:
-        app: photoprism
+        app.kubernetes.io/name: photoprism
     spec:
       containers:
         - name: photoprism
@@ -77,6 +77,6 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    app: photoprism
+    app.kubernetes.io/name: photoprism
   ports:
     - port: 2342

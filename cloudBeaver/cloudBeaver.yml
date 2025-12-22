@@ -17,11 +17,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: cloudbeaver
+      app.kubernetes.io/name: cloudbeaver
   template:
     metadata:
       labels:
-        app: cloudbeaver
+        app.kubernetes.io/name: cloudbeaver
     spec:
       volumes:
         - name: workspace
@@ -43,5 +43,5 @@ spec:
   ports:
     - port: 8978
   selector:
-    app: cloudbeaver
+    app.kubernetes.io/name: cloudbeaver
   type: ClusterIP

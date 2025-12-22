@@ -6,11 +6,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: minio-console
+      app.kubernetes.io/name: minio-console
   template:
     metadata:
       labels:
-        app: minio-console
+        app.kubernetes.io/name: minio-console
     spec:
       containers:
         - name: minio-console
@@ -28,4 +28,4 @@ spec:
   ports:
     - port: 9090
   selector:
-    app: minio-console
+    app.kubernetes.io/name: minio-console

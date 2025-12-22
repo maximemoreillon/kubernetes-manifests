@@ -17,11 +17,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mongo
+      app.kubernetes.io/name: mongo
   template:
     metadata:
       labels:
-        app: mongo
+        app.kubernetes.io/name: mongo
     spec:
       volumes:
         - name: mongo
@@ -42,5 +42,5 @@ spec:
   ports:
     - port: 27017
   selector:
-    app: mongo
+    app.kubernetes.io/name: mongo
   type: ClusterIP

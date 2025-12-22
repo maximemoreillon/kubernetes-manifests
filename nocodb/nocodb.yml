@@ -17,11 +17,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nocodb
+      app.kubernetes.io/name: nocodb
   template:
     metadata:
       labels:
-        app: nocodb
+        app.kubernetes.io/name: nocodb
     spec:
       containers:
         - name: nocodb
@@ -46,6 +46,6 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    app: nocodb
+    app.kubernetes.io/name: nocodb
   ports:
     - port: 8080

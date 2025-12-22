@@ -6,11 +6,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: haproxy
+      app.kubernetes.io/name: haproxy
   template:
     metadata:
       labels:
-        app: haproxy
+        app.kubernetes.io/name: haproxy
     spec:
       containers:
         - name: haproxy
@@ -58,6 +58,6 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    app: haproxy
+    app.kubernetes.io/name: haproxy
   ports:
     - port: 80

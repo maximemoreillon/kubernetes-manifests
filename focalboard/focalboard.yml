@@ -17,11 +17,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: focalboard
+      app.kubernetes.io/name: focalboard
   template:
     metadata:
       labels:
-        app: focalboard
+        app.kubernetes.io/name: focalboard
     spec:
       enableServiceLinks: false
       containers:
@@ -40,10 +40,10 @@ kind: Service
 metadata:
   name: focalboard
   labels:
-    app: focalboard
+    app.kubernetes.io/name: focalboard
 spec:
   ports:
     - port: 8000
   selector:
-    app: focalboard
+    app.kubernetes.io/name: focalboard
   type: ClusterIP

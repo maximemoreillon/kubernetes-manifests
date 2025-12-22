@@ -6,11 +6,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mongo-express
+      app.kubernetes.io/name: mongo-express
   template:
     metadata:
       labels:
-        app: mongo-express
+        app.kubernetes.io/name: mongo-express
     spec:
       containers:
         - name: mongo-express
@@ -28,5 +28,5 @@ spec:
   ports:
     - port: 8081
   selector:
-    app: mongo-express
+    app.kubernetes.io/name: mongo-express
   type: ClusterIP

@@ -28,11 +28,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: navidrome
+      app.kubernetes.io/name: navidrome
   template:
     metadata:
       labels:
-        app: navidrome
+        app.kubernetes.io/name: navidrome
     spec:
       containers:
         - name: navidrome
@@ -58,5 +58,5 @@ spec:
   ports:
     - port: 4533
   selector:
-    app: navidrome
+    app.kubernetes.io/name: navidrome
   type: ClusterIP

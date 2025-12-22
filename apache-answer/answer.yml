@@ -17,11 +17,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: apache-answer
+      app.kubernetes.io/name: apache-answer
   template:
     metadata:
       labels:
-        app: apache-answer
+        app.kubernetes.io/name: apache-answer
     spec:
       containers:
         - name: apache-answer
@@ -43,5 +43,5 @@ spec:
   ports:
     - port: 80
   selector:
-    app: apache-answer
+    app.kubernetes.io/name: apache-answer
   type: ClusterIP

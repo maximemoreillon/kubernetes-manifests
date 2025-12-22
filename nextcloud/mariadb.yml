@@ -17,11 +17,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mariadb
+      app.kubernetes.io/name: mariadb
   template:
     metadata:
       labels:
-        app: mariadb
+        app.kubernetes.io/name: mariadb
     spec:
       containers:
         - name: mariadb
@@ -44,6 +44,6 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    app: mariadb
+    app.kubernetes.io/name: mariadb
   ports:
     - port: 3306

@@ -19,11 +19,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: emqx
+      app.kubernetes.io/name: emqx
   template:
     metadata:
       labels:
-        app: emqx
+        app.kubernetes.io/name: emqx
     spec:
       containers:
         - name: emqx
@@ -49,7 +49,7 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    app: emqx
+    app.kubernetes.io/name: emqx
   ports:
 
 ---
@@ -61,7 +61,7 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    app: emqx
+    app.kubernetes.io/name: emqx
   ports:
     - port: 1883
       name: mqtt

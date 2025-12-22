@@ -17,11 +17,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: timescaledb
+      app.kubernetes.io/name: timescaledb
   template:
     metadata:
       labels:
-        app: timescaledb
+        app.kubernetes.io/name: timescaledb
     spec:
       volumes:
         - name: timescaledb
@@ -46,5 +46,5 @@ spec:
   ports:
     - port: 5432
   selector:
-    app: timescaledb
+    app.kubernetes.io/name: timescaledb
   type: ClusterIP

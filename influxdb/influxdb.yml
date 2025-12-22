@@ -17,11 +17,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: influxdb
+      app.kubernetes.io/name: influxdb
   template:
     metadata:
       labels:
-        app: influxdb
+        app.kubernetes.io/name: influxdb
     spec:
       containers:
         - name: influxdb
@@ -53,5 +53,5 @@ spec:
   ports:
     - port: 8086
   selector:
-    app: influxdb
+    app.kubernetes.io/name: influxdb
   type: ClusterIP

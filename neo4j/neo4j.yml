@@ -17,11 +17,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: neo4j
+      app.kubernetes.io/name: neo4j
   template:
     metadata:
       labels:
-        app: neo4j
+        app.kubernetes.io/name: neo4j
     spec:
       enableServiceLinks: false
       containers:
@@ -42,7 +42,7 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    app: neo4j
+    app.kubernetes.io/name: neo4j
   ports:
     - port: 7474
       name: neo4j-http

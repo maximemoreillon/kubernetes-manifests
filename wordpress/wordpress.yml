@@ -19,11 +19,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: wordpress
+      app.kubernetes.io/name: wordpress
   template:
     metadata:
       labels:
-        app: wordpress
+        app.kubernetes.io/name: wordpress
     spec:
       volumes:
         - name: wordpress
@@ -54,5 +54,5 @@ spec:
   ports:
     - port: 80
   selector:
-    app: wordpress
+    app.kubernetes.io/name: wordpress
   type: ClusterIP

@@ -6,11 +6,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: redis
+      app.kubernetes.io/name: redis
   template:
     metadata:
       labels:
-        app: redis
+        app.kubernetes.io/name: redis
     spec:
       containers:
         - name: redis
@@ -24,5 +24,5 @@ spec:
   ports:
     - port: 6379
   selector:
-    app: redis
+    app.kubernetes.io/name: redis
   type: ClusterIP

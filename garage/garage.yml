@@ -28,11 +28,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: garage
+      app.kubernetes.io/name: garage
   template:
     metadata:
       labels:
-        app: garage
+        app.kubernetes.io/name: garage
     spec:
       containers:
         - name: garage
@@ -69,5 +69,5 @@ spec:
     - name: admin
       port: 3903
   selector:
-    app: garage
+    app.kubernetes.io/name: garage
   type: ClusterIP

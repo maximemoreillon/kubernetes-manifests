@@ -19,11 +19,11 @@ spec:
     type: Recreate
   selector:
     matchLabels:
-      app: pypiserver
+      app.kubernetes.io/name: pypiserver
   template:
     metadata:
       labels:
-        app: pypiserver
+        app.kubernetes.io/name: pypiserver
     spec:
       containers:
         - name: pypiserver
@@ -44,6 +44,6 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    app: pypiserver
+    app.kubernetes.io/name: pypiserver
   ports:
     - port: 8080

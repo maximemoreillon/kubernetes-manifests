@@ -17,11 +17,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: minio
+      app.kubernetes.io/name: minio
   template:
     metadata:
       labels:
-        app: minio
+        app.kubernetes.io/name: minio
     spec:
       volumes:
         - name: minio
@@ -48,6 +48,6 @@ spec:
   ports:
     - port: 9000
   selector:
-    app: minio
+    app.kubernetes.io/name: minio
 ---
 

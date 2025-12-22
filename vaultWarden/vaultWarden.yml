@@ -17,11 +17,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: vaultwarden
+      app.kubernetes.io/name: vaultwarden
   template:
     metadata:
       labels:
-        app: vaultwarden
+        app.kubernetes.io/name: vaultwarden
     spec:
       containers:
         - name: vaultwarden
@@ -43,5 +43,5 @@ spec:
   ports:
     - port: 80
   selector:
-    app: vaultwarden
+    app.kubernetes.io/name: vaultwarden
   type: ClusterIP

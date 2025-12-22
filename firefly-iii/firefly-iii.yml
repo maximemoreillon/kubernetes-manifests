@@ -6,11 +6,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: firefly-iii
+      app.kubernetes.io/name: firefly-iii
   template:
     metadata:
       labels:
-        app: firefly-iii
+        app.kubernetes.io/name: firefly-iii
     spec:
       containers:
         - name: firefly-iii
@@ -27,5 +27,5 @@ spec:
   ports:
     - port: 8080
   selector:
-    app: firefly-iii
+    app.kubernetes.io/name: firefly-iii
   type: ClusterIP

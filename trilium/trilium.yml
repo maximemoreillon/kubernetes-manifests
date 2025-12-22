@@ -17,11 +17,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: trilium
+      app.kubernetes.io/name: trilium
   template:
     metadata:
       labels:
-        app: trilium
+        app.kubernetes.io/name: trilium
     spec:
       containers:
         - name: trilium
@@ -38,11 +38,11 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: trilium
+    app.kubernetes.io/name: trilium
   name: trilium
 spec:
   ports:
     - port: 8080
   selector:
-    app: trilium
+    app.kubernetes.io/name: trilium
   type: ClusterIP

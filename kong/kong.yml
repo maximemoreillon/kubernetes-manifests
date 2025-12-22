@@ -6,11 +6,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: kong
+      app.kubernetes.io/name: kong
   template:
     metadata:
       labels:
-        app: kong
+        app.kubernetes.io/name: kong
     spec:
       containers:
         - name: kong
@@ -38,7 +38,7 @@ spec:
   ports:
     - port: 8000
   selector:
-    app: kong
+    app.kubernetes.io/name: kong
   type: ClusterIP
 ---
 apiVersion: v1

@@ -17,11 +17,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: gitea
+      app.kubernetes.io/name: gitea
   template:
     metadata:
       labels:
-        app: gitea
+        app.kubernetes.io/name: gitea
     spec:
       containers:
         - name: gitea
@@ -50,5 +50,5 @@ spec:
     - name: ssh
       port: 22
   selector:
-    app: gitea
+    app.kubernetes.io/name: gitea
   type: ClusterIP

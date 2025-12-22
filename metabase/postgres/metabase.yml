@@ -6,11 +6,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: metabase
+      app.kubernetes.io/name: metabase
   template:
     metadata:
       labels:
-        app: metabase
+        app.kubernetes.io/name: metabase
     spec:
       containers:
         - name: metabase
@@ -37,5 +37,5 @@ spec:
   ports:
     - port: 3000
   selector:
-    app: metabase
+    app.kubernetes.io/name: metabase
   type: ClusterIP

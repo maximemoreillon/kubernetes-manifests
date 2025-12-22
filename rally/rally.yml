@@ -6,11 +6,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: rally
+      app.kubernetes.io/name: rally
   template:
     metadata:
       labels:
-        app: rally
+        app.kubernetes.io/name: rally
     spec:
       containers:
         - name: rally
@@ -41,5 +41,5 @@ spec:
   ports:
     - port: 3000
   selector:
-    app: rally
+    app.kubernetes.io/name: rally
   type: ClusterIP

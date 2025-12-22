@@ -17,11 +17,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mysql
+      app.kubernetes.io/name: mysql
   template:
     metadata:
       labels:
-        app: mysql
+        app.kubernetes.io/name: mysql
     spec:
       volumes:
         - name: mysql
@@ -51,5 +51,5 @@ spec:
   ports:
     - port: 3306
   selector:
-    app: mysql
+    app.kubernetes.io/name: mysql
   type: ClusterIP

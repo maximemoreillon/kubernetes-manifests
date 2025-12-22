@@ -39,11 +39,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: homarr
+      app.kubernetes.io/name: homarr
   template:
     metadata:
       labels:
-        app: homarr
+        app.kubernetes.io/name: homarr
     spec:
       containers:
         - name: homarr
@@ -77,5 +77,5 @@ spec:
   ports:
     - port: 7575
   selector:
-    app: homarr
+    app.kubernetes.io/name: homarr
   type: ClusterIP

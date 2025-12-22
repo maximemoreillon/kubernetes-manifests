@@ -6,11 +6,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: privoxy
+      app.kubernetes.io/name: privoxy
   template:
     metadata:
       labels:
-        app: privoxy
+        app.kubernetes.io/name: privoxy
     spec:
       containers:
         - name: privoxy
@@ -65,6 +65,6 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    app: privoxy
+    app.kubernetes.io/name: privoxy
   ports:
     - port: 8118

@@ -29,11 +29,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: syncthing
+      app.kubernetes.io/name: syncthing
   template:
     metadata:
       labels:
-        app: syncthing
+        app.kubernetes.io/name: syncthing
     spec:
       containers:
         - name: syncthing
@@ -79,5 +79,5 @@ spec:
       protocol: UDP
       targetPort: 21027
   selector:
-    app: syncthing
+    app.kubernetes.io/name: syncthing
   type: ClusterIP

@@ -17,11 +17,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: redmine
+      app.kubernetes.io/name: redmine
   template:
     metadata:
       labels:
-        app: redmine
+        app.kubernetes.io/name: redmine
     spec:
       containers:
         - name: redmine
@@ -53,5 +53,5 @@ spec:
   ports:
     - port: 80
   selector:
-    app: redmine
+    app.kubernetes.io/name: redmine
   type: ClusterIP

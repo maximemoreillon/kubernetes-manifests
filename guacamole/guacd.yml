@@ -6,11 +6,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: guacd
+      app.kubernetes.io/name: guacd
   template:
     metadata:
       labels:
-        app: guacd
+        app.kubernetes.io/name: guacd
     spec:
       containers:
         - name: guacd
@@ -24,5 +24,5 @@ spec:
   ports:
     - port: 4822
   selector:
-    app: guacd
+    app.kubernetes.io/name: guacd
   type: ClusterIP

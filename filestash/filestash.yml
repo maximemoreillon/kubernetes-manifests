@@ -17,11 +17,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: filestash
+      app.kubernetes.io/name: filestash
   template:
     metadata:
       labels:
-        app: filestash
+        app.kubernetes.io/name: filestash
     spec:
       containers:
         - name: filestash
@@ -43,5 +43,5 @@ spec:
   ports:
     - port: 8334
   selector:
-    app: filestash
+    app.kubernetes.io/name: filestash
   type: ClusterIP

@@ -17,11 +17,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: dashy
+      app.kubernetes.io/name: dashy
   template:
     metadata:
       labels:
-        app: dashy
+        app.kubernetes.io/name: dashy
     spec:
       containers:
         - name: dashy
@@ -63,5 +63,5 @@ spec:
   ports:
     - port: 80
   selector:
-    app: dashy
+    app.kubernetes.io/name: dashy
   type: ClusterIP

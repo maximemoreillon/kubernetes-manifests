@@ -6,11 +6,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: gatus
+      app.kubernetes.io/name: gatus
   template:
     metadata:
       labels:
-        app: gatus
+        app.kubernetes.io/name: gatus
     spec:
       containers:
         - name: gatus
@@ -48,5 +48,5 @@ spec:
   ports:
     - port: 8080
   selector:
-    app: gatus
+    app.kubernetes.io/name: gatus
   type: ClusterIP

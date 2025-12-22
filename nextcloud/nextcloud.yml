@@ -17,11 +17,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nextcloud
+      app.kubernetes.io/name: nextcloud
   template:
     metadata:
       labels:
-        app: nextcloud
+        app.kubernetes.io/name: nextcloud
     spec:
       containers:
         - name: nextcloud
@@ -45,5 +45,5 @@ spec:
   ports:
     - port: 80
   selector:
-    app: nextcloud
+    app.kubernetes.io/name: nextcloud
   type: ClusterIP

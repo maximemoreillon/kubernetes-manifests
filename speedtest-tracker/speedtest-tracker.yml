@@ -17,11 +17,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: speedtest-tracker
+      app.kubernetes.io/name: speedtest-tracker
   template:
     metadata:
       labels:
-        app: speedtest-tracker
+        app.kubernetes.io/name: speedtest-tracker
     spec:
       dnsPolicy: None
       dnsConfig:
@@ -74,11 +74,11 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: speedtest-tracker
+    app.kubernetes.io/name: speedtest-tracker
   name: speedtest-tracker
 spec:
   ports:
     - port: 80
   selector:
-    app: speedtest-tracker
+    app.kubernetes.io/name: speedtest-tracker
   type: ClusterIP

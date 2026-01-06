@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wg-easy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: wg-easy
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: wg-easy
+    spec:
+      containers:
+        - image: ghcr.io/wg-easy/wg-easy
+          name: wg-easy
+          env:
+            - name: WG_HOST
+              value: wg.hostname.com
+            - name: WG_PORT
+              value: "51820"
+          # Give pod permissions to modify iptables and load the wireguard kernel module
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+                - SYS_MODULE
+          volumeMounts:
+            - mountPath: /etc/wireguard
+              name: config
+          resources: {}
+
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: wg-easy
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wg-easy
+spec:
+  ports:
+    - name: wg
+      port: 51820
+      protocol: UDP
+    - name: ui
+      port: 51821
+      protocol: TCP
+  selector:
+    app.kubernetes.io/name: wg-easy
+  type: ClusterIP
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: wg-easy
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 256Mi

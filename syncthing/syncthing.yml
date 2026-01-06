@@ -24,7 +24,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: syncthing
-  namespace: syncthing
 spec:
   replicas: 1
   selector:
@@ -65,19 +64,15 @@ spec:
     - name: ui
       port: 8384
       protocol: TCP
-      targetPort: 8384
     - name: tcp-file-transfer
       port: 22000
       protocol: TCP
-      targetPort: 22000
     - name: quic-file-transfer
       port: 22000
       protocol: UDP
-      targetPort: 22000
     - name: discovery
       port: 21027
       protocol: UDP
-      targetPort: 21027
   selector:
     app.kubernetes.io/name: syncthing
   type: ClusterIP

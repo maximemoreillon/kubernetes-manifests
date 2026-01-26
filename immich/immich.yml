@@ -26,14 +26,12 @@ spec:
       containers:
         - name: immich
           image: ghcr.io/immich-app/immich-server:release
-          env:
-            - name: UPLOAD_LOCATION
-              value: ./library
+          env: []
           envFrom:
             - secretRef:
                 name: env
           volumeMounts:
-            - mountPath: /usr/app/data
+            - mountPath: /data
               name: immich
           resources: {}
       volumes:

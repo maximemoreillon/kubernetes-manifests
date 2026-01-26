@@ -26,7 +26,11 @@ spec:
       containers:
         - name: immich
           image: ghcr.io/immich-app/immich-server:release
-          env: []
+          env:
+            - name: IMMICH_PORT
+              value: "2283"
+            - name: REDIS_PORT
+              value: "6379"
           envFrom:
             - secretRef:
                 name: env

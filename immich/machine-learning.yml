@@ -15,8 +15,6 @@ metadata:
   name: immich-machine-learning
 spec:
   replicas: 1
-  strategy:
-    type: Recreate
   selector:
     matchLabels:
       app.kubernetes.io/name: immich-machine-learning
@@ -37,13 +35,7 @@ spec:
           volumeMounts:
             - mountPath: /cache
               name: cache
-          resources:
-            requests:
-              memory: 256Mi
-              cpu: 25m
-            limits:
-              memory: 2Gi
-              cpu: 500m
+          resources: {}
       volumes:
         - name: cache
           persistentVolumeClaim:

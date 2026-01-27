@@ -4,10 +4,10 @@ metadata:
   name: heimdall
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
-      storage: 10Gi
+      storage: 1Gi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -31,8 +31,6 @@ spec:
         - name: heimdall
           image: lscr.io/linuxserver/heimdall:latest
           env:
-            - name: TZ
-              value: Asia/Tokyo
             - name: PUID
               value: "1000"
             - name: PGID

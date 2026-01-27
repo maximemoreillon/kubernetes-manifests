@@ -8,7 +8,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 10Gi
+      storage: 5Gi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -29,10 +29,8 @@ spec:
         - name: emqx
           image: emqx:5.4.1
           env:
-            - name: EMQX_NAME
-              value: emqx
-            - name: EMQX_HOST
-              value: "192.168.1.2"
+            - name: EMQX_NODE__NAME
+              value: emqx@127.0.0.1
           volumeMounts:
             - mountPath: /opt/emqx/data/
               name: data
@@ -40,18 +38,6 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: emqx-data
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: emqx
-  namespace: emqx
-spec:
-  type: ClusterIP
-  selector:
-    app.kubernetes.io/name: emqx
-  ports:
-
 ---
 apiVersion: v1
 kind: Service

@@ -50,7 +50,7 @@ metadata:
   name: pgadmin
 spec:
   ports:
-    port: 80
+    - port: 80
   selector:
     app.kubernetes.io/name: pgadmin
   type: ClusterIP

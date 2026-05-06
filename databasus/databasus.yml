@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: databasus
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: databasus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: databasus
+  template:
+    metadata:
+      labels:
+        app: databasus
+    spec:
+      containers:
+        - name: databasus
+          image: databasus/databasus:latest
+          volumeMounts:
+            - mountPath: /databasus-data
+              name: databasus-data
+      volumes:
+        - name: databasus-data
+          persistentVolumeClaim:
+            claimName: databasus
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: databasus
+spec:
+  ports:
+    - port: 4005
+  selector:
+    app: databasus
+  type: ClusterIP
